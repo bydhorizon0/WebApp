@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnWeb", "LearnWeb\LearnWeb.csproj", "{8EA881F3-D498-427A-BCC7-1F52ABA0E5BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheaterWebApp", "TheaterWebApp\TheaterWebApp.csproj", "{1200750C-6487-476F-BDC9-558B68AD882E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheaterWebAppTest", "TheaterWebAppTest\TheaterWebAppTest.csproj", "{504FA0DE-5559-4465-A4CD-8D7698B9A2FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EA881F3-D498-427A-BCC7-1F52ABA0E5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA881F3-D498-427A-BCC7-1F52ABA0E5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA881F3-D498-427A-BCC7-1F52ABA0E5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA881F3-D498-427A-BCC7-1F52ABA0E5BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1200750C-6487-476F-BDC9-558B68AD882E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1200750C-6487-476F-BDC9-558B68AD882E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1200750C-6487-476F-BDC9-558B68AD882E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1200750C-6487-476F-BDC9-558B68AD882E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{504FA0DE-5559-4465-A4CD-8D7698B9A2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{504FA0DE-5559-4465-A4CD-8D7698B9A2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{504FA0DE-5559-4465-A4CD-8D7698B9A2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{504FA0DE-5559-4465-A4CD-8D7698B9A2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
