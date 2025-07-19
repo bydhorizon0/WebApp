@@ -5,7 +5,7 @@ using TheaterWebApp.Service;
 namespace TheaterWebApp.Controllers;
 
 [Route("[controller]/[action]")]
-public class TheaterController : ControllerBase
+public class TheaterController : Controller
 {
     private readonly ILogger<TheaterController> _logger;
     private readonly ITheaterService _theaterService;
@@ -17,10 +17,10 @@ public class TheaterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<MovieViewModel>>> GetMovies()
+    public async Task<ActionResult> List([FromQuery] MovieSearchRequest request)
     {
-        var allMovies = await _theaterService.GetAllMoviesAsync();
-        return Ok(allMovies);
+        var pageResult = await _theaterService.GetAllMoviesAsync(request);
+        return View(pageResult);
     }
 
     [HttpGet("{id}")]

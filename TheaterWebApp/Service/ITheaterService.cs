@@ -4,6 +4,6 @@ namespace TheaterWebApp.Service;
 
 public interface ITheaterService
 {
-    Task<List<MovieViewModel>> GetAllMoviesAsync();
+    Task<PageResult<MovieViewModel>> GetAllMoviesAsync(MovieSearchRequest request);
     Task<MovieDetailViewModel> GetMovieByIdAsync(int id);
 }
