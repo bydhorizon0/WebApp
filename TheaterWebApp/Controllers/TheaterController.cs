@@ -22,7 +22,7 @@ public class TheaterController : Controller
     [HttpGet("/")]
     public async Task<IActionResult> Index() => View();
 
-    [HttpGet("/list")]
+    [HttpGet]
     public async Task<ActionResult> List([FromQuery] MovieSearchRequest request)
     {
         var pageResult = await _theaterService.GetAllMoviesAsync(request);
