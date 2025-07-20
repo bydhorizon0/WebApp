@@ -29,7 +29,9 @@
             <div class="card h-100 shadow-sm">
                 @if (movie.MainImage?.Path is not null)
                 {
-                    <img src="@movie.MainImage.Path" class="card-img-top" alt="@movie.Title" style="object-fit: cover; height: 250px;">
+                    <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
+                        <img src="@movie.MainImage.Path" class="card-img-top" alt="@movie.Title" style="object-fit: cover; height: 250px;">
+                    </a>
                 }
                 else
                 {
@@ -39,7 +41,11 @@
                 }
 
                 <div class="card-body">
-                    <h5 class="card-title">@movie.Title</h5>
+                    <h5 class="card-title">
+                        <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
+                            @movie.Title    
+                        </a>
+                    </h5>
                     @if (!string.IsNullOrWhiteSpace(movie.Description))
                     {
                         <p class="card-text text-truncate" style="max-height: 4.5em;">@movie.Description</p>

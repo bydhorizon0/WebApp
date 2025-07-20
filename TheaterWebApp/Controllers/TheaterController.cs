@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheaterWebApp.Models;
 using TheaterWebApp.Service;
 
 namespace TheaterWebApp.Controllers;
 
+[Authorize]
 [Route("[controller]/[action]")]
 public class TheaterController : Controller
 {
@@ -15,8 +17,12 @@ public class TheaterController : Controller
         _logger = logger;
         _theaterService = theaterService;
     }
+    
+    [AllowAnonymous]
+    [HttpGet("/")]
+    public async Task<IActionResult> Index() => View();
 
-    [HttpGet]
+    [HttpGet("/list")]
     public async Task<ActionResult> List([FromQuery] MovieSearchRequest request)
     {
         var pageResult = await _theaterService.GetAllMoviesAsync(request);
@@ -24,9 +30,9 @@ public class TheaterController : Controller
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<MovieDetailViewModel>> GetMovie(int id)
+    public async Task<ActionResult> Detail(int id)
     {
         var movieDetail = await _theaterService.GetMovieByIdAsync(id);
-        return Ok(movieDetail);
+        return View(movieDetail);
     }
 }
