@@ -1,0 +1,42 @@
+﻿@{
+    TempData["Title"] = "Index";
+}
+
+<div class="theater-container justify-content-center">
+    <div class="curtain-bg"></div>
+    <div class="spotlight"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="main-content">
+        <div class="logo-container">
+            <div class="theater-icon">🎭</div>
+        </div>
+
+        <h1 class="app-title">TheaterWebApp</h1>
+        <p class="app-subtitle">영화의 모든 순간을 담다</p>
+
+        <div class="feature-cards">
+        @*
+            <div class="feature-card">
+                <div class="feature-icon">🎟️</div>
+                <h3 class="feature-title">간편 예매</h3>
+                <p class="feature-desc">원클릭으로 빠르고 편리한 티켓 예약</p>
+            </div>
+        *@
+        
+            <div class="feature-card" onclick="location.href='/list';" style="cursor: pointer;">
+                <div class="feature-icon">🎪</div>
+                <h3 class="feature-title">영화 정보</h3>
+                <p class="feature-desc">다양한 영화의 상세 정보와 리뷰</p>
+            </div>
+
+        @*
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3 class="feature-title">프리미엄 서비스</h3>
+                <p class="feature-desc">VIP 좌석과 특별 혜택 제공</p>
+            </div>
+        *@
+        </div>
+    </div>
+</div>

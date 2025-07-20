@@ -4,102 +4,110 @@
     TempData["Title"] = "영화 리스트";
 }
 
-<form asp-action="List" method="get" class="row g-2 mb-4">
-    <div class="col-auto">
-        <select class="form-select" name="Type">
-            <option value="title" selected>제목</option>
-            <option value="description">내용</option>
-        </select>
-    </div>
-    <div class="col-auto">
-        <input type="text" name="Keyword" class="form-control" placeholder="검색어를 입력하세요" value="@Context.Request.Query["Keyword"]">
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary">검색</button>
-    </div>
-</form>
+<div class="container">
+
+    <form asp-action="List" method="get" class="row g-2 mb-4">
+        <div class="col-auto">
+            <select class="form-select" name="Type">
+                <option value="title" selected>제목</option>
+                <option value="description">내용</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <input type="text" name="Keyword" class="form-control" placeholder="검색어를 입력하세요" value="@Context.Request.Query["Keyword"]">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+    </form>
 
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-    @foreach (var movie in Model.Items)
-    {
-        var modalId = $"modal-{movie.Id}";
-        
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                @if (movie.MainImage?.Path is not null)
-                {
-                    <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
-                        <img src="@movie.MainImage.Path" class="card-img-top" alt="@movie.Title" style="object-fit: cover; height: 250px;">
-                    </a>
-                }
-                else
-                {
-                    <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white" style="height: 250px;">
-                        <span>이미지 없음</span>
-                    </div>
-                }
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var movie in Model.Items)
+        {
+            var modalId = $"modal-{movie.Id}";
 
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
-                            @movie.Title    
-                        </a>
-                    </h5>
-                    @if (!string.IsNullOrWhiteSpace(movie.Description))
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    @if (movie.MainImage?.Path is not null)
                     {
-                        <p class="card-text text-truncate" style="max-height: 4.5em;">@movie.Description</p>
-                        <button type="button" class="btn btn-sm btn-outline-primary mt-auto" data-bs-toggle="modal" data-bs-target="#@modalId">
-                            자세히 보기
-                        </button>
+                        <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
+                            <img src="@movie.MainImage.Path" class="card-img-top" alt="@movie.Title"
+                                 style="object-fit: cover; height: 250px;">
+                        </a>
                     }
-                </div>
+                    else
+                    {
+                        <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white"
+                             style="height: 250px;">
+                            <span>이미지 없음</span>
+                        </div>
+                    }
 
-                <div class="card-footer small text-muted">
-                    장르: @(movie.MainGenre ?? "N/A") <br />
-                    개봉일: @movie.ReleaseDate.ToString("yyyy-MM-dd")
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a asp-controller="Theater" asp-action="Detail" asp-route-id="@movie.Id">
+                                @movie.Title
+                            </a>
+                        </h5>
+                        @if (!string.IsNullOrWhiteSpace(movie.Description))
+                        {
+                            <p class="card-text text-truncate" style="max-height: 4.5em;">@movie.Description</p>
+                            <button type="button" class="btn btn-sm btn-outline-primary mt-auto" data-bs-toggle="modal"
+                                    data-bs-target="#@modalId">
+                                자세히 보기
+                            </button>
+                        }
+                    </div>
+
+                    <div class="card-footer small text-muted">
+                        장르: @(movie.MainGenre ?? "N/A") <br/>
+                        개봉일: @movie.ReleaseDate.ToString("yyyy-MM-dd")
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalId-Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="@modalId-Label">@movie.Title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>@movie.Description</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalId-Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="@modalId-Label">@movie.Title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>@movie.Description</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
+
+    <nav class="mt-lg-5">
+        <ul class="pagination justify-content-center">
+            <!-- 이전 버튼 -->
+            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                <a href="?page=@(Model.CurrentPage - 1)&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">이전</a>
+            </li>
+
+            <!-- 페이지 번호 -->
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a href="?page=@i&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">@i</a>
+                </li>
+            }
+
+            <!-- 다음 버튼 -->
+            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                <a href="?page=@(Model.CurrentPage + 1)&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">다음</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
-<nav class="mt-lg-5">
-    <ul class="pagination justify-content-center">
-        <!-- 이전 버튼 -->
-        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-            <a href="?page=@(Model.CurrentPage - 1)&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">이전</a>
-        </li>
-        
-        <!-- 페이지 번호 -->
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a href="?page=@i&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">@i</a>
-            </li>
-        }
-        
-        <!-- 다음 버튼 -->
-        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-            <a href="?page=@(Model.CurrentPage + 1)&keyword=@Model.SearchKeyword&type=@Model.SearchType" class="page-link">다음</a>
-        </li>
-    </ul>
-</nav>
