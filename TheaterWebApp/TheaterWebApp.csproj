@@ -16,4 +16,102 @@
       <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.14" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\movie\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\'더 캐니언' - The Gorge.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\28년 후.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\5lbs of Pressure.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\A MINECRAFT MOVIE 마인크래프트 무비.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Dora and the Search for Sol Dorado.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\F1 더 무비.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\First Shift.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\In Vitro.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Kayara.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Man with No Past.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Seeds.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Sneaks.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\The Unholy Trinity.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Utopia.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\가라데 키드 레전드.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\국가 원수.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\글래디에이터 II.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\나는 네가 지난 여름에 한 일을 알고 있다.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\나의 잘못 런던.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\대부.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\데드풀과 울버린.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\데스 오브 유니콘.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\드래곤 길들이기 2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\드래곤 길들이기 3.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\드래곤 길들이기.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\디스턴트.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\디아블로.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\딥 커버.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\리추얼.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\릴로 &amp; 스티치.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\마디아의 데스티네이션 웨딩.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\맨 오브 스틸.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\메가 트위스터스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\모아나 2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\무파사 라이온 킹.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\미션 임파서블 파이널 레코닝.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\미스테이크.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\발레리나.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\백설공주.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\백설공주와 일곱난쟁이.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\베놈 라스트 댄스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\분노의 질주 라이드 오어 다이.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\브링 허 백.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\서브스턴스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\소버린.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쇼생크 탈출.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\수퍼 소닉 3.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쉐도우 포스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\슈퍼맨.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\슈퍼배드 4.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\스머프.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\썬더볼츠.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\씨너스 죄인들.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\아노라.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\아마추어.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\아이스 로드 벤전스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\어벤져스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\어카운턴트 2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\언틸 던 무한루프 데스게임.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\에덴.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\엘리오.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\오펜하이머.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\올드 가드 2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\올드 가드.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\와일드 로봇.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\워킹맨.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\워페어.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\인 더 로스트 랜즈.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\인사이드 아웃 2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\인셉션.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\인터스텔라.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\인플루언서.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\정사.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\존 윅 4.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\좀비스 4 뱀파이어의 등장.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쥬라기 월드 도미니언.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쥬라기 월드 새로운 시작.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쥬라기 월드 폴른 킹덤.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쥬라기 월드.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\캡틴 아메리카 브레이브 뉴 월드.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\케이팝 데몬 헌터스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\쿵푸팬더 4.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\크레이븐 더 헌터.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\클라운 인 어 콘필드.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\타이타닉.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\트리플 엑스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\파이터스 라이프.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\판타스틱 4 새로운 출발.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\프레데터 킬러 오브 킬러스.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\해리 포터와 마법사의 돌.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\헬 오브 어 썸머.jpg" />
+    </ItemGroup>
+
 </Project>
