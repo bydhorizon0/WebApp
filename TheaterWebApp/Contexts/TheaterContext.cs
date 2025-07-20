@@ -5,7 +5,6 @@ namespace TheaterWebApp.Contexts;
 
 public class TheaterContext : DbContext
 {
-    public IConfiguration _configuration;
 
     public DbSet<Movie> Movies { get; set; }
     public DbSet<User> Users { get; set; }
@@ -14,25 +13,9 @@ public class TheaterContext : DbContext
     public DbSet<MovieGenre> MovieGenres { get; set; }
     public DbSet<MovieRating> MovieRatings { get; set; }
 
-    public TheaterContext(DbContextOptions<TheaterContext> options, IConfiguration configuration) : base(options)
+    public TheaterContext(DbContextOptions<TheaterContext> options) : base(options)
     {
-        _configuration = configuration;
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            if (_configuration == null)
-            {
-                throw new InvalidOperationException("Configuration is null");
-            }
-
-            optionsBuilder.UseMySQL(_configuration.GetConnectionString("DefaultConnection"))
-                .UseLazyLoadingProxies()
-                .LogTo(Console.WriteLine, LogLevel.Information)
-                .EnableSensitiveDataLogging();
-        }
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
