@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using TheaterWebApp.Contexts;
 using TheaterWebApp.Entities;
 using TheaterWebApp.Service;
@@ -11,7 +12,18 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
+        // Serilog 설정
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File("Logs/log_.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
+            .Enrich.FromLogContext()
+            .CreateLogger();
+        
         var builder = WebApplication.CreateBuilder(args);
+        
+        // Serilog 등록
+        builder.Host.UseSerilog();
 
         // Add services to the container.
         // builder.Services.AddHostedService<MovieDataHostedService>();
@@ -28,6 +40,7 @@ public class Program
                 //options.Cookie.SameSite = SameSiteMode.None;
                 //options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
+        builder.Services.AddHttpContextAccessor();
         
         builder.Services.AddDbContext<TheaterContext>(options =>
         {
@@ -35,7 +48,7 @@ public class Program
             if (connectionString is null)
                 throw new InvalidOperationException("The connection string already exists");
 
-            options.UseMySQL(connectionString)
+            options.UseSqlite("Data Source=TheaterWebApp.db")
                 .LogTo(Console.WriteLine, LogLevel.Information)
                 .EnableSensitiveDataLogging();
         });
@@ -56,11 +69,18 @@ public class Program
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
-            app.UseExceptionHandler("/Home/Error");
+            // 상태 코드별 에러 페이지
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            app.UseExceptionHandler("/Error/Exception");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
+        else
+        {
+            // 개발 환경에선 상세 에러 노출
+            app.UseDeveloperExceptionPage();
+        }
+        
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
