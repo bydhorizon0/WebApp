@@ -61,6 +61,18 @@
         </div>
     </div>
 
+    <div class="mt-5">
+        <h4>댓글 작성</h4>
+        <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id" method="post">
+            <div class="mb-3">
+                <label for="commentContent" class="form-label">내용</label>
+                <textarea name="Comment" class="form-control" id="commentContent" rows="3" required></textarea>
+            </div>
+            <input type="hidden" name="ParentCommentId" value=""/>
+            <button type="submit" class="btn btn-primary">댓글 작성</button>
+        </form>
+    </div>
+
     @if (Model.Comments?.Any() == true)
     {
         <div class="mt-5">
@@ -71,7 +83,41 @@
                     <li class="list-group-item">
                         <strong>@comment.UserNickname</strong>
                         <small class="text-muted">(@comment.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</small>
-                        <p class="mb-0">@comment.Content</p>
+                        <p class="mb-1">@comment.Content</p>
+
+                        <!-- 대댓글 작성 폼 toggle -->
+                        <button class="btn btn-sm btn-link text-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#replyForm-@comment.Id">
+                            댓글 달기
+                        </button>
+
+                        <div class="collapse mt-2" id="replyForm-@comment.Id">
+                            <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id"
+                                  method="post">
+                                <div class="mb-2">
+                                    <textarea name="Comment" class="form-control" rows="2" placeholder="내용"
+                                              required></textarea>
+                                </div>
+                                <input type="hidden" name="ParentCommentId" value="@comment.Id"/>
+                                <button type="submit" class="btn btn-sm btn-secondary">작성</button>
+                            </form>
+                        </div>
+
+                        <!-- 대댓글 렌더링 -->
+                        @if (comment.NestedComment?.Any() == true)
+                        {
+                            <ul class="list-group mt-3 ms-4">
+                                @foreach (var child in comment.NestedComment)
+                                {
+                                    <li class="list-group-item">
+                                        <strong>@(child.UserNickname)</strong>
+                                        <small
+                                            class="text-muted">(@child.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</small>
+                                        <p class="mb-1">@child.Content</p>
+                                    </li>
+                                }
+                            </ul>
+                        }
                     </li>
                 }
             </ul>

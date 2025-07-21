@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using TheaterWebApp.Contexts;
+using TheaterWebApp.Entities;
 using TheaterWebApp.Models;
 
 namespace TheaterWebApp.Service;
@@ -7,11 +9,13 @@ namespace TheaterWebApp.Service;
 public class TheaterService : ITheaterService
 {
     private readonly ILogger<TheaterService> _logger;
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly TheaterContext _context;
 
-    public TheaterService(ILogger<TheaterService> logger, TheaterContext context)
+    public TheaterService(ILogger<TheaterService> logger, IHttpContextAccessor httpContextAccessor, TheaterContext context)
     {
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
         _context = context;
     }
 
@@ -69,7 +73,7 @@ public class TheaterService : ITheaterService
         };
     }
 
-    public async Task<MovieDetailViewModel> GetMovieByIdAsync(int id)
+    public async Task<MovieDetailViewModel> GetMovieByIdAsync(long id)
     {
         return await _context.Movies
             .Select(m => new MovieDetailViewModel
@@ -106,5 +110,26 @@ public class TheaterService : ITheaterService
                 MovieRating = 0.0,
             })
             .FirstOrDefaultAsync(m => m.Id == id) ?? throw new KeyNotFoundException($"Movie with id {id} not found");
+    }
+
+    public async Task SaveMovieCommentAsync(long movieId, CommentRequest request)
+    {
+        var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null)
+            throw new UnauthorizedAccessException("User is not authenticated.");
+        
+        if (!long.TryParse(userIdClaim.Value, out var userId)) 
+            throw new UnauthorizedAccessException("User NameIdentifier is something wrong.");
+
+        var comment = new Comment
+        {
+            Content = request.Comment,
+            ParentCommendId = request.ParentCommentId,
+            UserId = userId,
+            MovieId = movieId,
+        };
+        
+        await _context.Comments.AddAsync(comment);
+        await _context.SaveChangesAsync();
     }
 }

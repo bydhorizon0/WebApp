@@ -20,19 +20,26 @@ public class TheaterController : Controller
     
     [AllowAnonymous]
     [HttpGet("/")]
-    public async Task<IActionResult> Index() => View();
+    public IActionResult Index() => View();
 
     [HttpGet]
-    public async Task<ActionResult> List([FromQuery] MovieSearchRequest request)
+    public async Task<IActionResult> List([FromQuery] MovieSearchRequest request)
     {
         var pageResult = await _theaterService.GetAllMoviesAsync(request);
         return View(pageResult);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult> Detail(int id)
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> Detail(long id)
     {
         var movieDetail = await _theaterService.GetMovieByIdAsync(id);
         return View(movieDetail);
+    }
+
+    [HttpPost("{movieId:long}")]
+    public async Task<IActionResult> SaveComment(long movieId, CommentRequest request)
+    {
+        await _theaterService.SaveMovieCommentAsync(movieId, request);
+        return RedirectToAction(nameof(Detail), new { id = movieId });
     }
 }
