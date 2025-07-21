@@ -10,10 +10,12 @@ namespace TheaterWebApp.Controllers;
 [Route("[controller]/[action]")]
 public class AuthController : Controller
 {
+    private readonly ILogger<AuthController> _logger;
     private readonly IUserService _userService;
 
-    public AuthController(IUserService userService)
+    public AuthController(ILogger<AuthController> logger, IUserService userService)
     {
+        _logger = logger;
         _userService = userService;
     }
 
@@ -60,6 +62,7 @@ public class AuthController : Controller
         {
             new Claim(ClaimTypes.Email, loginUser.Email),
             new Claim(ClaimTypes.Name, loginUser.Nickname),
+            new Claim(ClaimTypes.NameIdentifier, loginUser.Id.ToString()),
         };
         
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -74,6 +77,7 @@ public class AuthController : Controller
                 ExpiresUtc = DateTimeOffset.UtcNow.AddHours(3),
             });
         
+        _logger.LogInformation($"{loginUser.Email} - 로그인 했습니다.");
         return RedirectToAction(nameof(TheaterController.List), "Theater");
     }
 

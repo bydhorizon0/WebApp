@@ -8,11 +8,13 @@ namespace TheaterWebApp.Service;
 
 public class UserService : IUserService
 {
+    private readonly ILogger<UserService> _logger;
     private readonly TheaterContext _context;
     private readonly PasswordHasher<User> _passwordHasher;
 
-    public UserService(TheaterContext context, PasswordHasher<User> passwordHasher)
+    public UserService(ILogger<UserService> logger, TheaterContext context, PasswordHasher<User> passwordHasher)
     {
+        _logger = logger;
         _context = context;
         _passwordHasher = passwordHasher;
     }
@@ -35,6 +37,8 @@ public class UserService : IUserService
         
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
+        
+        _logger.LogInformation($"{user.Email} 회원가입 했습니다.");
     }
 
     public async Task<User?> LoginAsync(LoginRequest request)
