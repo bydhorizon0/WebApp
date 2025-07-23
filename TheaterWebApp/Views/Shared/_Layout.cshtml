@@ -1,60 +1,94 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - TheaterWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Theater" asp-action="Index">Theater</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Theater" asp-action="List">Movies</a>
+    <div class="navbar bg-base-100 shadow-lg">
+        <div class="navbar-start">
+            <!-- Mobile menu button -->
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                        <a asp-area="" asp-controller="Theater" asp-action="List">Movies</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-controller="Auth" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-controller="Auth" asp-action="Login">Login</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Auth" asp-action="Register">Register</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- Brand -->
+            <a class="btn btn-ghost text-xl font-bold" asp-area="" asp-controller="Theater" asp-action="Index">Theater</a>
+        </div>
+        
+        <!-- Desktop menu -->
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <a asp-area="" asp-controller="Theater" asp-action="List">Movies</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="navbar-end hidden lg:flex">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="menu menu-horizontal px-1">
+                    <li>
+                        <a class="btn btn-ghost" asp-controller="Auth" asp-action="Logout">Logout</a>
                     </li>
                 </ul>
-                
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout">Logout</a>
-                        </li>
-                    </ul>
-                }
-                else
-                {
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register">Register</a>
-                        </li>
-                    </ul>   
-                }
-            </div>
+            }
+            else
+            {
+                <ul class="menu menu-horizontal px-1">
+                    <li>
+                        <a class="btn btn-ghost" asp-controller="Auth" asp-action="Login">Login</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-primary" asp-controller="Auth" asp-action="Register">Register</a>
+                    </li>
+                </ul>
+            }
         </div>
-    </nav>
+    </div>
 </header>
-<div class="">
-    <main role="main" class="">
+
+<main role="main" class="min-h-screen bg-base-200">
+    <div class="container mx-auto px-4 py-8">
         @RenderBody()
-    </main>
-</div>
+    </div>
+</main>
 
+<footer class="footer footer-center p-4 bg-base-300 text-base-content">
+    <aside>
+        <p>Copyright © 2024 - Theater Web App</p>
+    </aside>
+</footer>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -4,6 +4,20 @@
     TempData["Title"] = "영화 리스트";
 }
 
+@section Scripts
+{
+    <script>
+        function toggleReplyForm(commentId) {
+            const form = document.getElementById(`replyForm-${commentId}`);
+            if (form.classList.contains("hidden")) {
+                form.classList.remove("hidden");
+            } else {
+                form.classList.add("hidden");
+            }
+        }
+    </script>
+}
+
 <div class="container my-5">
     <div class="row mb-4">
         <div class="col-md-5">
@@ -19,14 +33,6 @@
                             </div>
                         }
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#movieImageCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">이전</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#movieImageCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">다음</span>
-                    </button>
                 </div>
             }
             else
@@ -61,59 +67,83 @@
         </div>
     </div>
 
-    <div class="mt-5">
-        <h4>댓글 작성</h4>
-        <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id" method="post">
-            <div class="mb-3">
-                <label for="commentContent" class="form-label">내용</label>
-                <textarea name="Comment" class="form-control" id="commentContent" rows="3" required></textarea>
+    <div class="mt-10 max-w-3xl mx-auto">
+        <div class="card bg-base-100 shadow-md">
+            <div class="card-body">
+                <h4 class="text-xl font-semibold mb-4">댓글 작성</h4>
+
+                <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id" method="post">
+                    <div class="form-control mb-4">
+                        <label for="commentContent" class="label">
+                            <span class="label-text">내용</span>
+                        </label>
+                        <textarea name="Comment" id="commentContent" rows="4"
+                        class="textarea textarea-bordered resize-none"
+                        placeholder="댓글을 입력하세요..." required></textarea>
+                    </div>
+
+                    <input type="hidden" name="ParentCommentId" value="" />
+
+                    <div class="form-control mt-2">
+                        <button type="submit" class="btn btn-primary">댓글 작성</button>
+                    </div>
+                </form>
             </div>
-            <input type="hidden" name="ParentCommentId" value=""/>
-            <button type="submit" class="btn btn-primary">댓글 작성</button>
-        </form>
+        </div>
     </div>
+
 
     @if (Model.Comments?.Any() == true)
     {
-        <div class="mt-5">
-            <h4>댓글</h4>
-            <ul class="list-group">
+        <div class="mt-10 max-w-3xl mx-auto">
+            <h4 class="text-xl font-semibold mb-4">댓글</h4>
+
+            <ul class="space-y-4">
                 @foreach (var comment in Model.Comments)
                 {
-                    <li class="list-group-item">
-                        <strong>@comment.UserNickname</strong>
-                        <small class="text-muted">(@comment.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</small>
-                        <p class="mb-1">@comment.Content</p>
+                    <li class="bg-base-100 p-4 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="font-semibold">@comment.UserNickname</span>
+                                <span class="text-sm text-gray-400 ml-2">(@comment.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</span>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-gray-700">@comment.Content</p>
 
-                        <!-- 대댓글 작성 폼 toggle -->
-                        <button class="btn btn-sm btn-link text-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#replyForm-@comment.Id">
-                            댓글 달기
-                        </button>
+                        <!-- 댓글 달기 버튼 -->
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-ghost text-primary"
+                                    type="button"
+                                    onclick="toggleReplyForm('@comment.Id')">
+                                💬 댓글 달기
+                            </button>
+                        </div>
 
-                        <div class="collapse mt-2" id="replyForm-@comment.Id">
-                            <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id"
-                                  method="post">
-                                <div class="mb-2">
-                                    <textarea name="Comment" class="form-control" rows="2" placeholder="내용"
-                                              required></textarea>
+                        <!-- 대댓글 입력 폼 (초기에는 hidden) -->
+                        <div id="replyForm-@comment.Id" class="mt-3 hidden">
+                            <form asp-action="SaveComment" asp-controller="Theater" asp-route-movieId="@Model.Id" method="post">
+                                <div class="form-control mb-2">
+                                    <textarea name="Comment" rows="2"
+                                          class="textarea textarea-bordered w-full resize-none"
+                                          placeholder="대댓글을 입력하세요..." required></textarea>
                                 </div>
-                                <input type="hidden" name="ParentCommentId" value="@comment.Id"/>
-                                <button type="submit" class="btn btn-sm btn-secondary">작성</button>
+                                <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                                <button type="submit" class="btn btn-sm btn-primary">작성</button>
                             </form>
                         </div>
 
                         <!-- 대댓글 렌더링 -->
                         @if (comment.NestedComment?.Any() == true)
                         {
-                            <ul class="list-group mt-3 ms-4">
+                            <ul class="mt-5 space-y-3 border-l-2 border-gray-200 pl-4">
                                 @foreach (var child in comment.NestedComment)
                                 {
-                                    <li class="list-group-item">
-                                        <strong>@(child.UserNickname)</strong>
-                                        <small
-                                            class="text-muted">(@child.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</small>
-                                        <p class="mb-1">@child.Content</p>
+                                    <li class="bg-base-200 p-3 rounded-md">
+                                        <div class="text-sm">
+                                            <strong>@child.UserNickname</strong>
+                                            <span class="text-gray-400 ml-2">(@child.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</span>
+                                        </div>
+                                        <p class="mt-1 text-gray-700">@child.Content</p>
                                     </li>
                                 }
                             </ul>
@@ -125,6 +155,7 @@
     }
     else
     {
-        <p class="text-muted mt-5">댓글이 아직 없습니다.</p>
+        <p class="text-center text-gray-400 mt-10">댓글이 아직 없습니다.</p>
     }
+
 </div>

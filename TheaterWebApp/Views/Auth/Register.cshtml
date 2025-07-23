@@ -4,36 +4,48 @@
     ViewData["Title"] = "회원가입";
 }
 
-<div class="container mt-5" style="max-width: 500px;">
-    <h2 class="text-center mb-4">회원가입</h2>
+<div class="flex items-center justify-center min-h-screen bg-base-200">
+    <div class="card w-full max-w-md shadow-xl bg-base-100">
+        <div class="card-body">
+            <h2 class="text-2xl font-bold text-center mb-4">회원가입</h2>
 
-    <form asp-action="Register" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-error mb-3 text-sm"></div>
 
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label">이메일</label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="form-control mb-4">
+                    <label asp-for="Email" class="label">
+                        <span class="label-text">이메일</span>
+                    </label>
+                    <input asp-for="Email" class="input input-bordered" />
+                    <span asp-validation-for="Email" class="text-error text-sm mt-1"></span>
+                </div>
+
+                <div class="form-control mb-4">
+                    <label asp-for="Nickname" class="label">
+                        <span class="label-text">닉네임</span>
+                    </label>
+                    <input asp-for="Nickname" class="input input-bordered" />
+                    <span asp-validation-for="Nickname" class="text-error text-sm mt-1"></span>
+                </div>
+
+                <div class="form-control mb-4">
+                    <label asp-for="Password" class="label">
+                        <span class="label-text">비밀번호</span>
+                    </label>
+                    <input asp-for="Password" type="password" class="input input-bordered" />
+                    <span asp-validation-for="Password" class="text-error text-sm mt-1"></span>
+                </div>
+
+                <div class="form-control mb-6">
+                    <label asp-for="ConfirmPassword" class="label">
+                        <span class="label-text">비밀번호 확인</span>
+                    </label>
+                    <input asp-for="ConfirmPassword" type="password" class="input input-bordered" />
+                    <span asp-validation-for="ConfirmPassword" class="text-error text-sm mt-1"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">가입하기</button>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label asp-for="Nickname" class="form-label">닉네임</label>
-            <input asp-for="Nickname" class="form-control" />
-            <span asp-validation-for="Nickname" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Password" class="form-label">비밀번호</label>
-            <input asp-for="Password" class="form-control" type="password" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="ConfirmPassword" class="form-label">비밀번호 확인</label>
-            <input asp-for="ConfirmPassword" class="form-control" type="password" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">가입하기</button>
-    </form>
+    </div>
 </div>
