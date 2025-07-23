@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TheaterWebApp.Contexts;
 using TheaterWebApp.Entities;
+using TheaterWebApp.Serilog;
 using TheaterWebApp.Service;
 
 namespace TheaterWebApp;
@@ -12,14 +13,6 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        // Serilog 설정
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
-            .WriteTo.Console()
-            .WriteTo.File("Logs/log_.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
-            .Enrich.FromLogContext()
-            .CreateLogger();
-        
         var builder = WebApplication.CreateBuilder(args);
         
         // Serilog 등록
@@ -55,6 +48,22 @@ public class Program
         builder.Services.AddScoped<PasswordHasher<User>>();
         builder.Services.AddScoped<ITheaterService, TheaterService>();
         builder.Services.AddScoped<IUserService, UserService>();
+
+        var accessor = builder.Services.BuildServiceProvider().GetRequiredService<IHttpContextAccessor>();
+
+        // Serilog 설정
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .Enrich.With(new UserEnricher(accessor))
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File(
+                path: "Logs/log_.txt", 
+                rollingInterval: RollingInterval.Day, 
+                retainedFileCountLimit: 10, 
+                outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Email} {UserIP} {Message:lj}{NewLine}{Exception}")
+            .Enrich.FromLogContext()
+            .CreateLogger();
 
         var app = builder.Build();
 
