@@ -11,9 +11,12 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.18" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.18" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.18" />
       <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.14" />
+      <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+      <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -112,6 +115,17 @@
       <_ContentIncludedByDefault Remove="wwwroot\movie\images\프레데터 킬러 오브 킬러스.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\movie\images\해리 포터와 마법사의 돌.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\movie\images\헬 오브 어 썸머.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Playboy Playmate Workout.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\The Hangman.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\Victoria.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\겟 아웃 셀러.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\더 배트맨.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\메간 2.0.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\메간.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\벼랑 끝에 서서.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\어벤져스 인피니티 워.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\원더 우먼.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\movie\images\파이널 데스티네이션 블러드라인.jpg" />
     </ItemGroup>
 
 </Project>
